@@ -10,6 +10,7 @@ module.exports = async (req,res) => {
       if(err) throw err
       client.close()
      })
+     
      res.status(200).end()
   })
 }
