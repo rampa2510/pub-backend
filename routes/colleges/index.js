@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 
-let urlProd = "mongodb+srv://ram:ramrishi25@cluster0-uvqoo.mongodb.net/test?retryWrites=true&w=majorit"
+let urlProd = "mongodb+srv://ram:ramrishi25@cluster0-uvqoo.mongodb.net/test?retryWrites=true&w=majority"
 let urlDeve = "mongodb://localhost:27017"
 
 module.exports = {

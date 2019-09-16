@@ -4,7 +4,7 @@ const { MongoClient } = require('mongodb')
 // import helper functions
 const { verifyCollege } = require('../colleges/index')
 
-let urlProd = "mongodb+srv://ram:ramrishi25@cluster0-uvqoo.mongodb.net/test?retryWrites=true&w=majorit"
+let urlProd = "mongodb+srv://ram:ramrishi25@cluster0-uvqoo.mongodb.net/test?retryWrites=true&w=majority"
 let urlDeve = "mongodb://localhost:27017"
 
 // this is the callback function with the add route
