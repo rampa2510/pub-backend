@@ -21,6 +21,7 @@ module.exports = (req,res) => {
      try {
       verifyCollegeResp = await verifyCollege(db,req.body.college)
      } catch (error) {
+        console.log(err)
         res.status(500).json({error})
       }
 

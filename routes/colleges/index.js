@@ -20,7 +20,9 @@ module.exports = {
   verifyCollege:async (db,collegeName)=>{
     return new Promise((resolve,reject)=>{
       db.collection('colleges').findOne({name:collegeName},(err,res)=>{
-        if(err) throw err
+        if(err) {
+          console.log(err)
+        }
         if(res)
           resolve(true)
         else
