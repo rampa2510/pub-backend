@@ -21,8 +21,8 @@ module.exports = {
     return new Promise((resolve,reject)=>{
       db.collection('colleges').findOne({name:collegeName},(err,res)=>{
         if(err) {
-          console.log(err)
-        }
+          res.status(500).json({err})
+          console.log(err)        }
         if(res)
           resolve(true)
         else

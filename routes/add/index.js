@@ -31,6 +31,7 @@ module.exports = (req,res) => {
 
       db.collection("colleges").insertOne({name:req.body.college},(err,respData)=>{
         if(err) {
+          res.status(500).json({err})
           console.log(err)
         }
       })
