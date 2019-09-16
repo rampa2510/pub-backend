@@ -10,7 +10,7 @@ let urlDeve = "mongodb://localhost:27017"
 // this is the callback function with the add route
 module.exports = (req,res) => {
 
-  MongoClient.connect(urlDeve,{ useNewUrlParser: true, useUnifiedTopology: true },async (err, client) => {   
+  MongoClient.connect(urlProd,{ useNewUrlParser: true, useUnifiedTopology: true },async (err, client) => {   
      if(err) {
        res.status(500).json({err})
      }
