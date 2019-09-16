@@ -13,6 +13,7 @@ module.exports = (req,res) => {
   MongoClient.connect(urlProd,{ useNewUrlParser: true, useUnifiedTopology: true },async (err, client) => {   
      if(err) {
        res.status(500).json({err})
+       console.log(err)
      }
      let db = client.db("publicity")
 
