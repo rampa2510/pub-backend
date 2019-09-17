@@ -1,29 +1,27 @@
-// import mongoClient
-const { MongoClient } = require('mongodb')
 
-// import helper functions
+//========================================================================================
+/*                                                                                      *
+ *                                import helper functions                               *
+ *                                                                                      */
+//========================================================================================
 const { verifyCollege } = require('../colleges/index')
-
-let urlProd = "mongodb+srv://ram:ramrishi25@cluster0-uvqoo.mongodb.net/test?retryWrites=true&w=majority"
-let urlDeve = "mongodb://localhost:27017"
+const {get} = require('../../helpers/conn')
+//########################################################################################
 
 // this is the callback function with the add route
-module.exports = (req,res) => {
+module.exports =async (req,res) => {
 
-  MongoClient.connect(urlProd,{ useNewUrlParser: true, useUnifiedTopology: true },async (err, client) => {   
-     if(err) {
-       res.status(500).json({err})
-       console.log(err)
-     }
-     let db = client.db("publicity")
-
-     let verifyCollegeResp
+    // we will reuse this variable 
+     let verifyCollegeResp,db
      // verify college and get the boolean value
+
      try {
+      db = get()
       verifyCollegeResp = await verifyCollege(db,req.body.college)
      } catch (error) {
-        console.log(err)
+        console.log(error)
         res.status(500).json({error})
+        process.exit(1)
       }
 
      // if the college is not present add it to the database
@@ -33,6 +31,7 @@ module.exports = (req,res) => {
         if(err) {
           res.status(500).json({err})
           console.log(err)
+          process.exit(1)
         }
       })
 
@@ -41,11 +40,9 @@ module.exports = (req,res) => {
      db.collection("details").insertOne(req.body,(err,respData)=>{
       if(err) {
         res.status(500).json({err})
+        process.exit(1)
       }     
     })
 
-     client.close()
-
      res.status(200).end()
-  })
 }

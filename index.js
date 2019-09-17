@@ -20,8 +20,18 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(cors())
 app.use('/',require('./routes'))
+const { connect } = require('./helpers/conn')
 
 //########################################################################################
 
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, async () => {
+  console.log(`Example app listening on port ${port}!`)
+  try {
+    let isMongoDbConnected = await connect()
+  } catch (error) {
+    console.log(error)
+    process.exit(1)
+  }
+
+})
