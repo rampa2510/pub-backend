@@ -70,7 +70,7 @@ module.exports = {
         }      
         // console.log(respData)
         let data = Object.assign({},respData)
-        res.status(200).send(data)
+        res.status(200).json(data)
       })
   }
 }
