@@ -37,6 +37,8 @@ module.exports =async (req,res) => {
 
      }
 
+     // insert details here
+
      db.collection("details").insertOne(req.body,(err,respData)=>{
       if(err) {
         res.status(500).json({err})
