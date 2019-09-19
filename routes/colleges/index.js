@@ -68,7 +68,8 @@ module.exports = {
           console.log(err)
           process.exit(1)
         }      
-        res.status(200).send({respData})
+        // console.log(respData)
+        res.status(200).send(respData)
       })
   }
 }
