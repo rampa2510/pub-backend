@@ -54,6 +54,7 @@ module.exports = {
    */
   fetchCollege:(req,res)=>{
     let db 
+    let { noOfPostsToSkip } = req.body
     try {
        db = get()
      } catch (error) {
@@ -61,7 +62,7 @@ module.exports = {
        res.status(500).json({error})
        process.exit(1)
      }
-      db.collection('colleges').find({}).toArray((err,respData)=>{
+      db.collection('colleges').find({}).limit(5).skip(noOfPostsToSkip).toArray((err,respData)=>{
         if(err) {
           res.status(500).json({err})
           console.log(err)
