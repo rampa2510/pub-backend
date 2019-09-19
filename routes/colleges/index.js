@@ -69,7 +69,8 @@ module.exports = {
           process.exit(1)
         }      
         // console.log(respData)
-        res.status(200).send(respData)
+        let data = Object.assign({},respData)
+        res.status(200).send(data)
       })
   }
 }
