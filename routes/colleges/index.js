@@ -55,6 +55,7 @@ module.exports = {
   fetchCollege:(req,res)=>{
     let db 
     let { noOfPostsToSkip } = req.body
+    console.log(noOfPostsToSkip)
     try {
        db = get()
      } catch (error) {
