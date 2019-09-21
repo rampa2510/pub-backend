@@ -68,8 +68,7 @@ module.exports = {
           console.log(err)
           process.exit(1)
         }      
-        // console.log(respData)
-        let data = Object.assign({},respData)
+        let data = respData.map(d=>d.name)
         res.status(200).json(data)
       })
   }
