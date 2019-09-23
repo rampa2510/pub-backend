@@ -28,7 +28,7 @@ const { fetchCollege } = require('./colleges')
 
 router.post('/add',add)
 
-router.post('/fetchcollege',fetchCollege)
+router.get('/fetchcollege',fetchCollege)
 
 //########################################################################################
 
