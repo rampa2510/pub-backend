@@ -1,0 +1,23 @@
+//========================================================================================
+const {get} = require('../../helpers/conn')
+//########################################################################################
+
+module.exports =async (req,res)=>{
+  try {
+    let db = get()
+    db.collection("details").find({college:req.body.collegeName}).toArray((err,respData)=>{
+      if(err) {
+        res.status(500).json({err})
+        console.log(err)    
+        process.exit(1)
+      }
+      console.log(respData)
+      res.status(200).send(respData)
+    })
+  } catch (error) {
+    console.log(error)
+      res.status(500).send({error})
+      process.exit(1) 
+  }
+
+}
