@@ -4,7 +4,7 @@ const {get} = require('../../helpers/conn')
 
 module.exports =async (req,res)=>{
   try {
-    console.log(req.body.collegeName)
+    // console.log(req.body.collegeName)
     let db = get()
     db.collection("details").find({college:req.body.collegeName}).toArray((err,respData)=>{
       if(err) {
@@ -12,7 +12,7 @@ module.exports =async (req,res)=>{
         console.log(err)    
         process.exit(1)
       }
-      console.log(respData)
+      // console.log(respData)
       res.status(200).send(respData)
     })
   } catch (error) {

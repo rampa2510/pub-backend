@@ -23,7 +23,7 @@ module.exports =async (req,res) => {
         res.status(500).json({error})
         process.exit(1)
       }
-      console.log(verifyCollegeResp)
+      // console.log(verifyCollegeResp)
      // if the college is not present add it to the database
      if(!verifyCollegeResp){
 
