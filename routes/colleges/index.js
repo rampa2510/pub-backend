@@ -24,12 +24,13 @@ module.exports = {
    */
   verifyCollege:async (db,collegeName)=>{
     return new Promise((resolve,reject)=>{
-      db.collection('colleges').findOne({name:collegeName},(err,res)=>{
+      db.collection('colleges').findOne({name:collegeName.toLowerCase()},(err,res)=>{
         if(err) {
-          res.status(500).json({err})
-          console.log(err)    
+          console.log(err)   
+          reject(err) 
           process.exit(1)
         }
+        console.log(res)
         if(res)
           resolve(true)
         else
