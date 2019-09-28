@@ -71,5 +71,53 @@ module.exports = {
         }      
         res.status(200).json(respData)
       })
+  },
+  /**
+   * @description     This function is the callback function that will
+   *                  be used when the fetch college code route is called
+   * 
+   * @param  req      The request object provided by express with the data sent with the request
+   * 
+   * @param  res      The response object provied by express which has the functions to send 
+   *                  response back to client
+   * 
+   * @returns {Object} College code Data
+   * 
+   * @author Ram Pandey
+   */
+  fetchCollegeCodes:(req,res)=>{
+    let db = get()
+    db.collection('collegeCodes').find({}).toArray((err,respData)=>{
+      if(err) {
+        res.status(500).json({err})
+        console.log(err)
+        process.exit(1)
+      }      
+      res.status(200).json(respData)
+    })
+  },
+  /**
+   * @description     This function is the callback function that will
+   *                  be used when the add college code route is called
+   * 
+   * @param  req      The request object provided by express with the data sent with the request
+   * 
+   * @param  res      The response object provied by express which has the functions to send 
+   *                  response back to client
+   * 
+   * @returns {Object} College code Data
+   * 
+   * @author Ram Pandey
+   */
+  addCollegeCodes:(req,res)=>{
+    let db = get()
+      db.collection('collegeCodes').insertOne({code:req.body.code.toLowerCase(),name:req.body.name.toLowerCase()},(err,respData)=>{
+        if(err) {
+          res.status(500).json({err})
+          console.log(err)
+          process.exit(1)
+        }
+        res.status(200).end()
+      })
   }
 }

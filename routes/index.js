@@ -16,7 +16,7 @@ const express = require('express'),
 //========================================================================================
 
 const add = require('./add')
-const { fetchCollege } = require('./colleges')
+const { fetchCollege,fetchCollegeCodes,addCollegeCodes } = require('./colleges')
 const postFun = require('./post')
 
 //########################################################################################
@@ -32,6 +32,10 @@ router.post('/add',add)
 router.get('/fetchcollege',fetchCollege)
 
 router.post('/fetchpost',postFun)
+
+router.get('/fetchcode',fetchCollegeCodes)
+
+router.post('/addcode',addCollegeCodes)
 
 //########################################################################################
 
