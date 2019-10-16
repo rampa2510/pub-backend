@@ -27,7 +27,7 @@ module.exports = {
       db.collection('colleges').findOne({name:collegeName.toLowerCase()},(err,res)=>{
         if(err) {
           console.log(err)   
-          reject(err) 
+          reject(err)
           process.exit(1)
         }
         console.log(res)
@@ -129,7 +129,7 @@ module.exports = {
           console.log(err)
           process.exit(1)
         }
-        res.status(200).end()
+        res.status(200).json([200,"ok"])
       })
   }
 }
