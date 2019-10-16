@@ -129,6 +129,7 @@ module.exports = {
           console.log(err)
           process.exit(1)
         }
+        console.log("l")
         res.status(200).json([200,"ok"])
       })
   }
