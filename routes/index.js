@@ -29,7 +29,7 @@ const postFun = require('./post')
 
 router.post('/add',add)
 
-router.get('/fetchcollege',fetchCollege)
+// router.get('/fetchcollege',fetchCollege)
 
 router.post('/fetchpost',postFun)
 
