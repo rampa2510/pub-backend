@@ -111,7 +111,7 @@ module.exports = {
   addCollegeCodes:(req,res)=>{
     let db = get()
 
-    db.collection('collegeCodes').findOne({code:req.body.code.toLowerCase()},(err,respData)=>{
+    db.collection('collegeCodes').findOne({code:req.body.code.trim().toLowerCase()},(err,respData)=>{
       if(err){
         res.status(500).json({err})
           console.log(err)
@@ -120,7 +120,7 @@ module.exports = {
       if(respData)
         res.status(409).json([409,"Conflict"])
       else{
-        db.collection('collegeCodes').insertOne({code:req.body.code.toLowerCase(),name:req.body.name.toLowerCase()},(err,respData)=>{
+        db.collection('collegeCodes').insertOne({code:req.body.code.trim().toLowerCase(),name:req.body.name.toLowerCase()},(err,respData)=>{
           if(err) {
             res.status(500).json({err})
             console.log(err)
