@@ -119,17 +119,19 @@ module.exports = {
       }
       if(respData)
         res.status(409).json([409,"Conflict"])
-        return
+      else{
+        db.collection('collegeCodes').insertOne({code:req.body.code.toLowerCase(),name:req.body.name.toLowerCase()},(err,respData)=>{
+          if(err) {
+            res.status(500).json({err})
+            console.log(err)
+            process.exit(1)
+          }
+          // console.log("l")
+          res.status(200).json([200,"ok"])
+        })
+      }
       })
 
-      db.collection('collegeCodes').insertOne({code:req.body.code.toLowerCase(),name:req.body.name.toLowerCase()},(err,respData)=>{
-        if(err) {
-          res.status(500).json({err})
-          console.log(err)
-          process.exit(1)
-        }
-        // console.log("l")
-        res.status(200).json([200,"ok"])
-      })
+      
   }
 }
