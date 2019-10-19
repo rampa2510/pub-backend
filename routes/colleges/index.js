@@ -135,11 +135,13 @@ module.exports = {
   editCode:(req,res)=>{
     let db = get()
     db.collection('collegeCodes').findOne({code:req.body.code.trim().toLowerCase()},(err,respData)=>{
+
       if(err){
           res.status(500).json({err})
           console.log(err)
           process.exit(1)
       }
+
       if(respData){
         let newValue={$set:{code:req.body.newcode,name:req.body.newname}}
         db.collection('collegeCodes').updateOne({code:req.body.code.trim().toLowerCase()},newValue,(err,respData)=>{
@@ -151,7 +153,9 @@ module.exports = {
           // console.log("l")
           res.status(200).json([200,"ok"])
         })
-      }
+      }else
+        res.status(400).json([400,"Bad request"])
+      
       // res.status(200).json([200,"ok"])
     })
   }
