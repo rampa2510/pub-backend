@@ -31,7 +31,6 @@ app.listen(port, async () => {
     let isMongoDbConnected = await connect()
   } catch (error) {
     console.log(error)
-    process.exit(1)
-  }
+      }
 
 })

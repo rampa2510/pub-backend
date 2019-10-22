@@ -10,7 +10,7 @@ module.exports =async (req,res)=>{
       if(err) {
         res.status(500).json({err})
         console.log(err)    
-        process.exit(1)
+          return
       }
       // console.log(respData)
       res.status(200).send(respData)
@@ -18,7 +18,7 @@ module.exports =async (req,res)=>{
   } catch (error) {
     console.log(error)
       res.status(500).send({error})
-      process.exit(1) 
+        return 
   }
 
 }
