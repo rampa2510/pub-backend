@@ -58,7 +58,8 @@ module.exports = {
         let passObject = hashPass(password,resp.salt)
 
         if(passObject.hash===resp.password){
-          res.status(200).json([200,"Ok",resp])
+          let data = {username:resp.username,type:resp.type}
+          res.status(200).json([200,"Ok",data])
           return
         }
 

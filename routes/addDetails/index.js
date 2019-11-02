@@ -37,7 +37,23 @@ module.exports =async (req,res) => {
          process.exit(1)
        }     
      })
-     res.status(200).json([200,"ok"])
+     const username = req.body.username
+     db.collection('users').findOne({username},(err,resp)=>{
+      if(err){
+        res.status(500).json({err})
+        console.log(err)
+        return
+      }
+      let newValue = {$set:{added:resp.added+1}}
+      db.collection('users').updateOne({username:resp.username},newValue,(err,respData)=>{
+        if(err) {
+          res.status(500).json({err})
+          console.log(err)
+            return
+        }
+        res.status(200).json([200,"ok"])
+      })
+     })
      }else{
       res.status(409).json([409,"conflict"]) 
      }     
