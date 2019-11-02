@@ -30,7 +30,7 @@ module.exports = {
         res.status(409).json([409,"Conflict"])
         return
       }
-      db.collection('users').insertOne({password:passObject.hash, username, type, salt:passObject.salt},(err,respData)=>{
+      db.collection('users').insertOne({password:passObject.hash, username, type, salt:passObject.salt,added:0},(err,respData)=>{
         if(err){
           res.status(500).json({err})
           console.log(err)
@@ -58,7 +58,7 @@ module.exports = {
         let passObject = hashPass(password,resp.salt)
 
         if(passObject.hash===resp.password){
-          res.status(200).json([200,"Ok"])
+          res.status(200).json([200,"Ok",resp])
           return
         }
 
