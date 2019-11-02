@@ -20,7 +20,7 @@ module.exports = {
         
     let passObject = hashPass(password)
 
-    db.collection('users').findOne({username,type},(err,resp)=>{
+    db.collection('users').findOne({username},(err,resp)=>{
       if(err){
         res.status(500).json({err})
         console.log(err)
@@ -43,10 +43,10 @@ module.exports = {
   login:(req,res)=>{
     let db = get()
 
-    const {password,username,type} = req.body
+    const {password,username} = req.body
         
 
-    db.collection('users').findOne({username,type},(err,resp)=>{
+    db.collection('users').findOne({username},(err,resp)=>{
       if(err){
         res.status(500).json({err})
         console.log(err)
