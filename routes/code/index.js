@@ -49,7 +49,6 @@ module.exports = {
    */
   addCollegeCodes:(req,res)=>{
     let db = get()
-
     db.collection('collegeCodes').findOne({code:req.body.code.trim().toLowerCase()},(err,respData)=>{
       if(err){
         res.status(500).json({err})
@@ -57,7 +56,7 @@ module.exports = {
             return
       }
       if(respData)
-        res.status(409).json([409,"Conflict"])
+        res.status(409).json([409,"Conflict",respData])
       else{
         db.collection('collegeCodes').insertOne({code:req.body.code.trim().toLowerCase(),name:req.body.name.toLowerCase()},(err,respData)=>{
           if(err) {
@@ -73,16 +72,26 @@ module.exports = {
   },
   editCode:(req,res)=>{
     let db = get()
-    db.collection('collegeCodes').findOne({code:req.body.code.trim().toLowerCase()},(err,respData)=>{
+    let code = req.body.code.trim().toLowerCase()
+    db.collection('collegeCodes').findOne({code},(err,respData)=>{
 
       if(err){
           res.status(500).json({err})
           console.log(err)
             return
       }
-
       if(respData){
-        let newValue={$set:{code:req.body.newcode,name:req.body.newname}}
+
+
+      db.collection('details').updateMany({college:code},{$set:{college:req.body.newcode.trim().toLowerCase()}},(err,respData)=>{
+        if(err) {
+          res.status(500).json({err})
+          console.log(err)
+            return
+        }
+
+        let newValue={$set:{code:req.body.newcode.trim().toLowerCase(),name:req.body.newname}}
+
         db.collection('collegeCodes').updateOne({code:req.body.code.trim().toLowerCase()},newValue,(err,respData)=>{
           if(err) {
             res.status(500).json({err})
@@ -92,6 +101,9 @@ module.exports = {
           // console.log("l")
           res.status(200).json([200,"ok"])
         })
+      })
+
+       
       }else
         res.status(400).json([400,"Bad request"])
       

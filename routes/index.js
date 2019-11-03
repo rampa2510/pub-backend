@@ -19,6 +19,7 @@ const { fetchCollegeCodes,addCollegeCodes,editCode } = require('./code')
 const postFun = require('./post')
 const { addUser,login } = require('./Auth')
 const addDetails = require('./addDetails')
+const { getuserData,getDetailsAddedByUser } = require('./analtyic')
 //########################################################################################
 
 //========================================================================================
@@ -44,6 +45,9 @@ router.post('/login',login)
 
 router.post('/add',addDetails)
 
+router.get('/analytics',getuserData)
+
+router.post('/user-analytics',getDetailsAddedByUser)
 //########################################################################################
 
 module.exports = router

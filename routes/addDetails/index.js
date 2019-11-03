@@ -37,13 +37,17 @@ module.exports =async (req,res) => {
          process.exit(1)
        }     
      })
-     const username = req.body.username
+
+     const username = req.body.addedBy
+
      db.collection('users').findOne({username},(err,resp)=>{
       if(err){
         res.status(500).json({err})
         console.log(err)
         return
       }
+
+      // console.log(resp)
       let newValue = {$set:{added:resp.added+1}}
       db.collection('users').updateOne({username:resp.username},newValue,(err,respData)=>{
         if(err) {
