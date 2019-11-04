@@ -25,14 +25,16 @@ module.exports = {
     let db = get()
 
     const {username} = req.body
-    console.log(username)
+    // console.log(username)
     db.collection('details').find({addedBy:username}).toArray((err,resp)=>{
       if(err) {
         res.status(500).json({err})
         console.log(err)    
           return
       }
-      console.log(resp)
+      
+      // console.log(resp)
+
       res.status(200).json([200,"ok",resp])
     })
   }
