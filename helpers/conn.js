@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb')
 
 let connection = null
 
-let urlProd = ""
+let urlProd = "mongodb+srv://ram:ramrishi25@cluster0-uvqoo.mongodb.net/test?retryWrites=true&w=majority"
 let urlDeve = "mongodb://localhost:27017"
 
 let option = { useNewUrlParser: true, useUnifiedTopology: true }
