@@ -12,7 +12,7 @@ const {get} = require('../../helpers/conn')
 module.exports = {
   getuserData:(req,res)=>{
     let db = get()
-    db.collection('users').find({}).project({username:1,added:1}).toArray((err,respData)=>{
+    db.collection('users').find({username:{$nin:['testuser1','testadmin1']}}).project({username:1,added:1}).toArray((err,respData)=>{
       if(err){
         res.status(500).json([500,"Internal server error",err])
         console.log(err)
