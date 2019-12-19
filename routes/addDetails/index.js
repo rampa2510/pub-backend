@@ -20,7 +20,7 @@ module.exports =async (req,res) => {
      try {
       db = get()
       verifyCollegeResp = await verifyCollege(db,req.body.college)
-      verifyFilledCollegeDB = await verifyFilledCollegeDB(db,req.body)
+      verifyFilledCollegeDB = await verifyFilledCollege(db,req.body.name)
      } catch (error) {
         console.log(error)
         res.status(500).json({error})
@@ -39,6 +39,7 @@ module.exports =async (req,res) => {
          res.status(500).json({err})
          process.exit(1)
        }   
+       console.log(verifyFilledCollegeDB)
        if(!verifyFilledCollegeDB){
           db.collection("filledCollege").insertOne({code:verifyCollegeResp.code,name:verifyCollegeResp.name},(err,respData)=>{
           if(err) {
@@ -58,7 +59,7 @@ module.exports =async (req,res) => {
         return
       }
 
-      // console.log(resp)
+      console.log(resp)
       let newValue = {$set:{added:resp.added+1}}
       db.collection('users').updateOne({username:resp.username},newValue,(err,respData)=>{
         if(err) {
