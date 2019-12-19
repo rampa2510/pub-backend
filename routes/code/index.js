@@ -12,6 +12,30 @@ module.exports = {
 
   /**
    * @description     This function is the callback function that will
+   *                  be used when the fetch college code route for select data is called
+   * 
+   * @param  req      The request object provided by express with the data sent with the request
+   * 
+   * @param  res      The response object provied by express which has the functions to send 
+   *                  response back to client
+   * 
+   * @returns {Object} College code Data
+   * 
+   * @author Ram Pandey
+   */
+  fetchCollegeCodesWithData:(req,res)=>{
+    let db = get()
+    db.collection('filledCollege').find({}).toArray((err,respData)=>{
+      if(err) {
+        res.status(500).json({err})
+        console.log(err)
+          return
+      }      
+      res.status(200).json(respData)
+    })
+  },
+    /**
+   * @description     This function is the callback function that will
    *                  be used when the fetch college code route is called
    * 
    * @param  req      The request object provided by express with the data sent with the request
@@ -25,7 +49,7 @@ module.exports = {
    */
   fetchCollegeCodes:(req,res)=>{
     let db = get()
-    db.collection('filledCollege').find({}).toArray((err,respData)=>{
+    db.collection('collegeCodes').find({}).toArray((err,respData)=>{
       if(err) {
         res.status(500).json({err})
         console.log(err)
@@ -34,6 +58,7 @@ module.exports = {
       res.status(200).json(respData)
     })
   },
+
   /**
    * @description     This function is the callback function that will
    *                  be used when the add college code route is called

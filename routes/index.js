@@ -15,7 +15,7 @@ const express = require('express'),
  *                                                                                      */
 //========================================================================================
 
-const { fetchCollegeCodes,addCollegeCodes,editCode } = require('./code')
+const { fetchCollegeCodes,addCollegeCodes,editCode,fetchCollegeCodesWithData } = require('./code')
 const postFun = require('./post')
 const { addUser,login } = require('./Auth')
 const addDetails = require('./addDetails')
@@ -46,6 +46,8 @@ router.post('/login',login)
 router.post('/add',addDetails)
 
 router.get('/analytics',getuserData)
+
+router.get('/codewdata',fetchCollegeCodesWithData)
 
 router.post('/user-analytics',getDetailsAddedByUser)
 //########################################################################################
