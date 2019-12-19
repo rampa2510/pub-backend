@@ -1,7 +1,7 @@
 module.exports = {
   /**
    * @description       This function will verify whether a given college
-   *                    is present in the database or not 
+   *                    is present in the filledCollege collection or not 
    * 
    * @param db          - Database connnection to perfom operations
    * 
@@ -11,16 +11,16 @@ module.exports = {
    * 
    * @author Ram Pandey 
    */
-  verifyCollege:async (db,collegeName)=>{
+  verifyFilledCollege:async (db,collegeName)=>{
     return new Promise((resolve,reject)=>{
-      db.collection('collegeCodes').findOne({code:collegeName.toLowerCase()},(err,res)=>{
+      db.collection('filledCollege').findOne({name:collegeName.toLowerCase()},(err,res)=>{
         if(err) {
           console.log(err)   
           reject(err)
           process.exit(1)
         }
         if(res)
-          resolve(res)
+          resolve(true)
         else
           resolve(false)
       })

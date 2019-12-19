@@ -25,7 +25,7 @@ module.exports = {
    */
   fetchCollegeCodes:(req,res)=>{
     let db = get()
-    db.collection('collegeCodes').find({}).toArray((err,respData)=>{
+    db.collection('filledCollege').find({}).toArray((err,respData)=>{
       if(err) {
         res.status(500).json({err})
         console.log(err)

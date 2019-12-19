@@ -6,18 +6,21 @@
 //========================================================================================
 const { verifyCollege } = require('../../helpers/verifyCollege')
 const {get} = require('../../helpers/conn')
+const { verifyFilledCollege } = require('../../helpers/enterOnlyUsedCollege')
+
 //########################################################################################
 
 // this is the callback function with the add route
 module.exports =async (req,res) => {
 
     // we will reuse this variable 
-     let verifyCollegeResp,db
+     let verifyCollegeResp,db,verifyFilledCollegeDB
      // verify college and get the boolean value
 
      try {
       db = get()
       verifyCollegeResp = await verifyCollege(db,req.body.college)
+      verifyFilledCollegeDB = await verifyFilledCollegeDB(db,req.body)
      } catch (error) {
         console.log(error)
         res.status(500).json({error})
@@ -35,7 +38,15 @@ module.exports =async (req,res) => {
        if(err) {
          res.status(500).json({err})
          process.exit(1)
-       }     
+       }   
+       if(!verifyFilledCollegeDB){
+          db.collection("filledCollege").insertOne({code:verifyCollegeResp.code,name:verifyCollegeResp.name},(err,respData)=>{
+          if(err) {
+            res.status(500).json({err})
+            process.exit(1)
+          } 
+        })
+      }
      })
 
      const username = req.body.addedBy
