@@ -20,7 +20,7 @@ module.exports =async (req,res) => {
      try {
       db = get()
       verifyCollegeResp = await verifyCollege(db,req.body.college)
-      verifyFilledCollegeDB = await verifyFilledCollege(db,req.body.name)
+      verifyFilledCollegeDB = await verifyFilledCollege(db,req.body.college)
      } catch (error) {
         console.log(error)
         res.status(500).json({error})

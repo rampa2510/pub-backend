@@ -14,13 +14,13 @@ module.exports = {
   verifyFilledCollege:async (db,collegeName)=>{
     console.log(collegeName)
     return new Promise((resolve,reject)=>{
-      db.collection('filledCollege').findOne({name:collegeName.toLowerCase()},(err,res)=>{
+      db.collection('filledCollege').findOne({code:collegeName.toLowerCase()},(err,res)=>{
         if(err) {
           console.log(err)   
           reject(err)
           process.exit(1)
         }
-        console.log(res)
+        // console.log(res)
         if(res)
           resolve(true)
         else
