@@ -20,6 +20,7 @@ const postFun = require('./post')
 const { addUser,login } = require('./Auth')
 const addDetails = require('./addDetails')
 const { getuserData,getDetailsAddedByUser } = require('./analtyic')
+const editDetails =require('./editDetail')
 //########################################################################################
 
 //========================================================================================
@@ -50,6 +51,8 @@ router.get('/analytics',getuserData)
 router.get('/codewdata',fetchCollegeCodesWithData)
 
 router.post('/user-analytics',getDetailsAddedByUser)
+
+router.post('/edit-details',editDetails)
 //########################################################################################
 
 module.exports = router

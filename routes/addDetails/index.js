@@ -20,7 +20,6 @@ module.exports =async (req,res) => {
      try {
       db = get()
       verifyCollegeResp = await verifyCollege(db,req.body.college)
-      verifyFilledCollegeDB = await verifyFilledCollege(db,req.body.college)
      } catch (error) {
         console.log(error)
         res.status(500).json({error})
@@ -30,7 +29,15 @@ module.exports =async (req,res) => {
      // if the college is present then only add it
      if(verifyCollegeResp){
       let data = req.body;
-      
+
+      try {
+        verifyFilledCollegeDB = await verifyFilledCollege(db,req.body.college)
+      } catch (error) {
+        console.log(error)
+        res.status(500).json({error})
+        process.exit(1)
+      }
+
       // to make the college code all lower case for avoiding conflicts while verfying
       data["college"] = req.body.college.toLowerCase()
 
@@ -39,7 +46,7 @@ module.exports =async (req,res) => {
          res.status(500).json({err})
          process.exit(1)
        }   
-       console.log(verifyFilledCollegeDB)
+      //  console.log(verifyFilledCollegeDB)
        if(!verifyFilledCollegeDB){
           db.collection("filledCollege").insertOne({code:verifyCollegeResp.code,name:verifyCollegeResp.name},(err,respData)=>{
           if(err) {
