@@ -12,7 +12,7 @@ module.exports = {
    * @author Ram Pandey 
    */
   verifyFilledCollege:async (db,collegeName)=>{
-    console.log(collegeName)
+    // console.log(collegeName)
     return new Promise((resolve,reject)=>{
       db.collection('filledCollege').findOne({code:collegeName.toLowerCase()},(err,res)=>{
         if(err) {

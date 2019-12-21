@@ -66,7 +66,7 @@ module.exports =async (req,res) => {
         return
       }
 
-      console.log(resp)
+      // console.log(resp)
       let newValue = {$set:{added:resp.added+1}}
       db.collection('users').updateOne({username:resp.username},newValue,(err,respData)=>{
         if(err) {
