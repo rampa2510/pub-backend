@@ -106,6 +106,15 @@ module.exports = {
             return
       }
       if(respData){
+        let newValue={$set:{code:req.body.newcode.trim().toLowerCase(),name:req.body.newname}}
+
+        db.collection('filledCollege').updateOne({code},{$set:newValue},(err,respData)=>{
+          if(err) {
+            res.status(500).json({err})
+            console.log(err)
+              return
+          }
+        })
 
 
       db.collection('details').updateMany({college:code},{$set:{college:req.body.newcode.trim().toLowerCase()}},(err,respData)=>{
@@ -115,7 +124,6 @@ module.exports = {
             return
         }
 
-        let newValue={$set:{code:req.body.newcode.trim().toLowerCase(),name:req.body.newname}}
 
         db.collection('collegeCodes').updateOne({code:req.body.code.trim().toLowerCase()},newValue,(err,respData)=>{
           if(err) {
